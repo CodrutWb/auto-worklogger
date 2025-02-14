@@ -61,6 +61,7 @@ async function loginToWabix(email, password) {
         // Check for redirect (which usually indicates successful login)
         if (loginResponse.status === 302) {
             const location = loginResponse.headers.get('location');
+            console.log(loginResponse)
             console.log('Redirected to:', location);
 
             // Get updated cookies
