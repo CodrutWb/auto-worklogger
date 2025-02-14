@@ -1,0 +1,24 @@
+{
+  "name": "auto-worklogger",
+  "version": "1.0.0",
+  "main": "auto-logger.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodrutWb/auto-worklogger.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodrutWb/auto-worklogger/issues"
+  },
+  "homepage": "https://github.com/CodrutWb/auto-worklogger#readme",
+  "description": "",
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3"
+  }
+}
