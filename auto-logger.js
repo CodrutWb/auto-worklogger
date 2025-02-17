@@ -7,12 +7,15 @@ import {
 } from './worklogs.js';
 import express from 'express';
 import cron from 'node-cron';
+import fs from 'fs';
+
 const email = 'codrut.dica@webitfactory.io';
 const password = 'webit';
 const startDate = getTodayDate()
 const endDate = getTodayDate()
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 app.get('/', async (req, res) => {
   const lastWorklog = getLastWorklogTime();
   res.send(`<!DOCTYPE html>
@@ -78,7 +81,8 @@ app.get('/', async (req, res) => {
 function getLastWorklogTime() {
   if (fs.existsSync(LOG_FILE)) {
       const data = fs.readFileSync(LOG_FILE, 'utf8');
-      return JSON.parse(data).lastWorklog;
+      const parsedData = JSON.parse(data);
+      return `${parsedData.lastWorklog} ${parsedData.error}`;
   }
   return "No worklog submitted yet.";
 }

@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import fs from 'fs';
 
 const description = 'review and assign tasks, team sync, manage client and providers communication, assist on specific matters that need technical intervention on db (investigate users or bets / export reports for accounting / make adjustments to balances as per Moneytree team requirements / others)'
 const LOG_FILE = 'lastWorklog.json';
