@@ -79,11 +79,29 @@ app.get('/', async (req, res) => {
   </html>`);
 });
 
+
 function getLastWorklogTime() {
   if (fs.existsSync(LOG_FILE)) {
       const data = fs.readFileSync(LOG_FILE, 'utf8');
       const parsedData = JSON.parse(data);
-      return `${parsedData.lastWorklog} ${parsedData.error}`;
+
+      if (!parsedData.lastWorklog) {
+          return "No worklog submitted yet.";
+      }
+
+      const date = new Date(parsedData.lastWorklog);
+
+      // Format date to GMT+2 (hh:mm dd/mm/yyyy)
+      const formattedDate = new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Europe/Bucharest', // GMT+2 (Romania timezone)
+          hour: '2-digit',
+          minute: '2-digit',
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+      }).format(date);
+
+      return `${formattedDate} GMT+2 ${parsedData.error || ''}`.trim();
   }
   return "No worklog submitted yet.";
 }
