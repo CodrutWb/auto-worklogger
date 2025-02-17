@@ -3,7 +3,8 @@ import {
 } from './login.js';
 import {
   fetchWorklogs,
-  submitNewWorklog
+  submitNewWorklog,
+  LOG_FILE
 } from './worklogs.js';
 import express from 'express';
 import cron from 'node-cron';

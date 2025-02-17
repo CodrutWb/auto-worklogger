@@ -116,5 +116,6 @@ async function submitNewWorklog(xsrfToken, laravelSession, date) {
 
 export {
     fetchWorklogs,
-    submitNewWorklog
+    submitNewWorklog,
+    LOG_FILE
 };
