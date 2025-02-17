@@ -14,6 +14,7 @@ const endDate = getTodayDate()
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.get('/', async (req, res) => {
+  const lastWorklog = getLastWorklogTime();
   res.send(`<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -68,10 +69,19 @@ app.get('/', async (req, res) => {
       <div class="container">
           <h1>🚀 Auto Worklogger</h1>
           <p>Your automated work logs are running smoothly!</p>
+          <p>Last worklog: <strong>${lastWorklog}</strong></p>
       </div>
   </body>
   </html>`);
 });
+
+function getLastWorklogTime() {
+  if (fs.existsSync(LOG_FILE)) {
+      const data = fs.readFileSync(LOG_FILE, 'utf8');
+      return JSON.parse(data).lastWorklog;
+  }
+  return "No worklog submitted yet.";
+}
 
 
 async function submitWorklog() {

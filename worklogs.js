@@ -1,6 +1,11 @@
 import * as cheerio from "cheerio";
 
 const description = 'review and assign tasks, team sync, manage client and providers communication, assist on specific matters that need technical intervention on db (investigate users or bets / export reports for accounting / make adjustments to balances as per Moneytree team requirements / others)'
+const LOG_FILE = 'lastWorklog.json';
+function saveLastWorklogTime(error = '') {
+    const timestamp = new Date().toISOString();
+    fs.writeFileSync(LOG_FILE, JSON.stringify({ lastWorklog: timestamp, error }, null, 2));
+}
 
 async function fetchWorklogs(xsrfToken, laravelSession, startDate, endDate) {
     const url =
@@ -63,11 +68,6 @@ async function getProjectId(html) {
     return employeeOption.attr("value");
 }
 
-
-
-
-
-
 async function submitNewWorklog(xsrfToken, laravelSession, date) {
     const [csrfToken, html] = await getCsrfToken(xsrfToken, laravelSession);
     const employeeId = await getEmployeeId(html)
@@ -100,8 +100,11 @@ async function submitNewWorklog(xsrfToken, laravelSession, date) {
             body: formData.toString(), // Convert form data to URL-encoded string
         });
 
-        if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-
+        if (!response.ok) {
+            saveLastWorklogTime(`HTTP Error: ${response.status}`);
+            throw new Error(`HTTP Error: ${response.status}`)
+        };
+        saveLastWorklogTime();
         const data = await response.text(); // Expecting HTML response
     } catch (error) {
         console.error("Submission Error:", error);
