@@ -107,7 +107,8 @@ async function submitWorklog() {
   }
 }
 
-cron.schedule('0 17 * * 1-5', submitWorklog); // This will run Mon-Fri at 11 PM
+// cron.schedule('0 17 * * 1-5', submitWorklog); // This will run Mon-Fri at 11 PM
+submitWorklog();
 
 
 function getTodayDate() {
