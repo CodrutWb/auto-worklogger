@@ -22,5 +22,5 @@
     "express": "^4.21.2",
     "node-cron": "^3.0.3"
   },
-  "type": "module"   // <-- Add this line to enable ES module syntax
+  "type": "module"
 }

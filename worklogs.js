@@ -1,5 +1,7 @@
 import * as cheerio from "cheerio";
 
+const description = 'review and assign tasks, team sync, manage client and providers communication, assist on specific matters that need technical intervention on db (investigate users or bets / export reports for accounting / make adjustments to balances as per Moneytree team requirements / others)'
+
 async function fetchWorklogs(xsrfToken, laravelSession, startDate, endDate) {
     const url =
         `https://wabix.io/worklogs?draw=8&columns%5B0%5D%5Bdata%5D=DT_RowIndex&columns%5B0%5D%5Bname%5D=No&columns%5B0%5D%5Bsearchable%5D=false&columns%5B0%5D%5Borderable%5D=false&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=hours&columns%5B1%5D%5Bname%5D=hours&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B2%5D%5Bdata%5D=employee&columns%5B2%5D%5Bname%5D=employee_id&columns%5B2%5D%5Bsearchable%5D=true&columns%5B2%5D%5Borderable%5D=true&columns%5B2%5D%5Bsearch%5D%5Bvalue%5D=22&columns%5B2%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B3%5D%5Bdata%5D=project&columns%5B3%5D%5Bname%5D=project_id&columns%5B3%5D%5Bsearchable%5D=true&columns%5B3%5D%5Borderable%5D=true&columns%5B3%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B3%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B4%5D%5Bdata%5D=worklog_type&columns%5B4%5D%5Bname%5D=worklog_type&columns%5B4%5D%5Bsearchable%5D=true&columns%5B4%5D%5Borderable%5D=true&columns%5B4%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B4%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B5%5D%5Bdata%5D=description&columns%5B5%5D%5Bname%5D=description&columns%5B5%5D%5Bsearchable%5D=true&columns%5B5%5D%5Borderable%5D=true&columns%5B5%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B5%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B6%5D%5Bdata%5D=date&columns%5B6%5D%5Bname%5D=date&columns%5B6%5D%5Bsearchable%5D=false&columns%5B6%5D%5Borderable%5D=true&columns%5B6%5D%5Bsearch%5D%5Bvalue%5D=${startDate}%3A%3A${endDate}&columns%5B6%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B7%5D%5Bdata%5D=action&columns%5B7%5D%5Bname%5D=action&columns%5B7%5D%5Bsearchable%5D=true&columns%5B7%5D%5Borderable%5D=false&columns%5B7%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B7%5D%5Bsearch%5D%5Bregex%5D=false&start=0&length=100&search%5Bvalue%5D=&search%5Bregex%5D=false&_=1739538576397`;
@@ -77,7 +79,7 @@ async function submitNewWorklog(xsrfToken, laravelSession, date) {
     formData.append("hours", "8");
     formData.append("employee_id", employeeId);
     formData.append("date", date); // Dynamically set today's date
-    formData.append("description", "team sync, review support group problems, test and report bugs");
+    formData.append("description", description);
     formData.append("project_id", projectId);
     formData.append("worklog_type", "administrative");
 
