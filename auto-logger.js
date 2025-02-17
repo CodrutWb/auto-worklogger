@@ -107,14 +107,23 @@ async function submitWorklog() {
   }
 }
 
-// cron.schedule('0 17 * * 1-5', submitWorklog); // This will run Mon-Fri at 11 PM
-submitWorklog();
-
+function scheduleCron() {
+  try {
+    console.log("Initializing cronjob!");
+    cron.schedule('12 17 * *  1-5', submitWorklog); // This will run Mon-Fri at 11 PM
+    console.log("Cronjob initialized successfully!")
+  }
+  catch(e) {
+    console.error(e)
+  }
+};
 
 function getTodayDate() {
   const today = new Date();
   return today.toISOString().split("T")[0]; // Formats as YYYY-MM-DD
 }
+
+scheduleCron(); 
 
 // Start the server
 app.listen(PORT, () => {
