@@ -14,7 +14,21 @@ const endDate = getTodayDate()
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.get('/', async (req, res) => {
-  res.send("Server is running!");
+  res.send(`
+    <html>
+      <head>
+        <title>Auto Worklogger</title>
+        <style>
+          body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+          h1 { color: #007bff; }
+        </style>
+      </head>
+      <body>
+        <h1>Welcome to Auto Worklogger!</h1>
+        <p>This Node.js app is running successfully.</p>
+      </body>
+    </html>
+  `);
 });
 
 async function submitWorklog() {
