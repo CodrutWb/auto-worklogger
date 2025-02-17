@@ -86,6 +86,7 @@ function getLastWorklogTime() {
       const parsedData = JSON.parse(data);
 
       if (!parsedData.lastWorklog) {
+        console.log("NO PARSED DATA LATEST WORKLOG")
           return "No worklog submitted yet.";
       }
 
@@ -103,6 +104,7 @@ function getLastWorklogTime() {
 
       return `${formattedDate} GMT+2 ${parsedData.error || ''}`.trim();
   }
+  console.log("pe la final")
   return "No worklog submitted yet.";
 }
 
