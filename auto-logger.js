@@ -9,6 +9,7 @@ import {
 import express from 'express';
 import cron from 'node-cron';
 import fs from 'fs';
+import fetch from 'node-fetch';
 
 const email = 'codrut.dica@webitfactory.io';
 const password = 'webit';
@@ -134,12 +135,26 @@ function scheduleCron() {
   }
 };
 
+setInterval(() => {
+  fetch('https://worklogger.dica.wtf/')
+    .then(res => console.log("Keeping app alive"))
+    .catch(err => console.error("Ping failed:", err));
+}, 5 * 60 * 1000); // Ping every 5 minutes
+
 function getTodayDate() {
   const today = new Date();
   return today.toISOString().split("T")[0]; // Formats as YYYY-MM-DD
 }
 
 scheduleCron(); 
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Promise Rejection:', reason);
+});
 
 // Start the server
 app.listen(PORT, () => {
