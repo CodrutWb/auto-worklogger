@@ -117,8 +117,8 @@ async function submitWorklog() {
     const worklogs = await fetchWorklogs(cookies.cookies['XSRF-TOKEN'], cookies.cookies.laravel_session, startDate, endDate);
 
     if (worklogs.recordsTotal > 0) return; //If worklogs were manually added already, do not add new ones.
+    console.log("No worklogs today, submitting new worklog.")
     submitNewWorklog(cookies.cookies['XSRF-TOKEN'], cookies.cookies.laravel_session, startDate)
-
   } catch (error) {
     console.error("Error in worklog submission:", error);
   }
@@ -127,7 +127,7 @@ async function submitWorklog() {
 function scheduleCron() {
   try {
     console.log("Initializing cronjob!");
-    cron.schedule('17 16 * *  1-5', submitWorklog); // This will run Mon-Fri at 11 PM
+    cron.schedule('13 12 * *  1-5', submitWorklog); // This will run Mon-Fri at 11 PM
     console.log("Cronjob initialized successfully!")
   }
   catch(e) {
