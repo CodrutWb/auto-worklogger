@@ -39,6 +39,7 @@ async function fetchWorklogs(xsrfToken, laravelSession, startDate, endDate) {
         }
 
         const data = await response.json();
+        console.log("TODAY WORKLOGS ARE: ", data)
         return data;
     } catch (error) {
         console.error("Fetch Error:", error);
