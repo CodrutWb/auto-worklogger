@@ -127,7 +127,7 @@ async function submitWorklog() {
 function scheduleCron() {
   try {
     console.log("Initializing cronjob!");
-    cron.schedule('32 16 * * 1-5', submitWorklog); // This will run Mon-Fri at 11 PM
+    cron.schedule('50 09 * * 1-5', submitWorklog); // This will run Mon-Fri at 11 PM
     console.log("Cronjob initialized successfully!")
   }
   catch(e) {
