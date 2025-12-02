@@ -75,6 +75,7 @@ async function getProjectId(html) {
 }
 
 async function submitNewWorklog(xsrfToken, laravelSession, date) {
+    return;
     const [csrfToken, html] = await getCsrfToken(xsrfToken, laravelSession);
     const employeeId = await getEmployeeId(html)
     const projectId = await getProjectId(html);
